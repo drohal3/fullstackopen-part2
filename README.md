@@ -133,3 +133,4 @@ return (
 ```
 
 **Solution:**
+The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
