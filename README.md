@@ -134,3 +134,10 @@ return (
 
 **Solution:**
 The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
+
+## Exercise 2.5: separate module
+**Task:**
+Declare the Course component as a separate module, which is imported by the App component. You can include all subcomponents of the course into the same module.
+
+**Solution:**
+The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
