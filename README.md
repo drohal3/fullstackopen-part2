@@ -66,3 +66,10 @@ Show also the sum of the exercises of the course.
 
 **Solution:**
 The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
+
+## Exercise 2.3*: Course information step8
+**Task:**
+If you haven't done so already, calculate the sum of exercises with the array method reduce.
+
+**Solution:**
+The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
