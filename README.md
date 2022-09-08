@@ -58,4 +58,11 @@ The application must work regardless of the number of parts a course has, so mak
 Ensure that the console shows no errors!
 
 **Solution:**
-Solution: The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
+The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.
+
+## Exercise 2.2: Course information step7
+**Task:**
+Show also the sum of the exercises of the course.
+
+**Solution:**
+The solution is demonstrated in the courseinfo application (courseinfo folder). See commits for more details.

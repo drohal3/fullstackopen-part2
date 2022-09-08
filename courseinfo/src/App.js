@@ -19,11 +19,18 @@ const Part = ({part}) => {
     )
 }
 
+const Stats = ({parts}) => {
+    return (
+        <strong><p>total of {parts.reduce((sum, part) => {return sum + part.exercises}, 0)} exercises</p></strong>
+    )
+}
+
 const Course = ({course}) => {
     return (
         <>
             <Header name={course.name}/>
             <Content parts={course.parts}/>
+            <Stats parts={course.parts}/>
         </>
     )
 }
