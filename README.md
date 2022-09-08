@@ -214,3 +214,16 @@ Using template strings is the more idiomatic option and the sign of a true JavaS
 **Solution:**
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
 
+## Exercise 2.8: The Phonebook Step3
+**Task:**
+Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second input element to the form (along with its own event handler):
+```
+<form>
+  <div>name: <input /></div>
+  <div>number: <input /></div>
+  <div><button type="submit">add</button></div>
+</form>
+```
+
+**Solution:**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
