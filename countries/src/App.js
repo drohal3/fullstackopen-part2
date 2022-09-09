@@ -11,10 +11,11 @@ const Filter = ({filter, filterChangeHandler}) => {
     )
 }
 
-const Country = ({country}) => {
+const Country = ({country, showClickHandle}) => {
     return (
         <div>
-            <p>{country.name.common}</p>
+            {country.name.common}
+            <button value={country.name.common} onClick={showClickHandle}>show</button>
         </div>
     )
 }
@@ -32,7 +33,7 @@ const CountryDetail = ({country}) => {
             <ul>
                 {languages.map(language => <li key={language}>{language}</li>)}
             </ul>
-            <img src={country.flags.png}></img>
+            <img alt="flag" src={country.flags.png}></img>
         </>
     )
 }
@@ -56,6 +57,11 @@ function App() {
         setCountriesFilter(event.target.value)
     }
 
+    const handleShowClick = (event) => {
+        event.preventDefault()
+        setCountriesFilter(event.target.value)
+    }
+
     let countriesToShow = countries.filter(country => country.name.common.toLowerCase().includes(countriesFilter.toLowerCase()))
 
     return (
@@ -65,7 +71,8 @@ function App() {
                 <p>Too many matches, specify another filter</p> : countriesToShow.length === 1 ?
                     <CountryDetail country={countriesToShow[0]}/> : countriesToShow.map(country => <Country
                         key={country.name.official}
-                        country={country}/>)}
+                        country={country}
+                        showClickHandle={handleShowClick}/>)}
         </div>
     )
 }

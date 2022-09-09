@@ -349,3 +349,10 @@ NB: It is enough that your application works for most of the countries. Some cou
 
 **Solution**
 The solution is demonstrated in the countries application (countries folder). See commits for more details.
+
+## Exercise 2.13*: Data for countries, step2
+Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country
+In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like Sudan, can be ignored.
+
+**Solution**
+The solution is demonstrated in the countries application (countries folder). See commits for more details.
