@@ -390,3 +390,12 @@ Note that you will need to restart the server to apply the changes.
 
 **Solution**
 The solution is demonstrated in the countries application (countries folder). See commits for more details.
+
+## Exercise 2.15: Phonebook step7
+**Task:**
+Let's return to our phonebook application.
+
+Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
+
+**Solution**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.

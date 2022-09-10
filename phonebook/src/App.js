@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const Filter = ({filter, changeHandler}) => {
@@ -80,6 +80,16 @@ const App = () => {
             name: newName,
             number: newNumber
         }
+
+        axios
+            .post('http://localhost:3001/persons', notePerson)
+            .then(response => {
+                setPersons(persons.concat(notePerson))
+                setNewName('')
+                setNewNumber('')
+            }).catch(error => {
+            console.log('fail')
+        })
 
         setPersons(persons.concat(notePerson))
         setNewName('')
