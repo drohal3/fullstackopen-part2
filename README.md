@@ -399,3 +399,11 @@ Currently, the numbers that are added to the phonebook are not saved to a backen
 
 **Solution**
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
+
+## Exercise 2.16: Phonebook step8
+**Task:**
+Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
+
+**Solution:**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
+
