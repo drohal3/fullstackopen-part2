@@ -20,10 +20,44 @@ const Country = ({country, showClickHandle}) => {
     )
 }
 
+const Weather = ({country}) => {
+    const [weather, setWeather] = useState([])
+
+    let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${country.capitalInfo.latlng[0]}&lon=${country.capitalInfo.latlng[1]}&appid=${process.env.REACT_APP_API_KEY}`
+    console.log(weatherUrl)
+
+    useEffect(() => {
+        console.log('effect')
+        axios
+            .get(weatherUrl)
+            .then(response => {
+                console.log('weather promise fulfilled')
+                setWeather(response.data)
+                console.log("weather", weather)
+            })
+    }, [])
+
+    let temperature = ("main" in weather && 'temp' in weather.main) ? (weather.main.temp) : false
+    let weatherDetail = ("weather" in weather && weather.weather.length > 0) ? weather.weather[0] : false
+    let weatherIconUrl = (weatherDetail) ? `http://openweathermap.org/img/wn/${weatherDetail.icon}@2x.png` : false
+
+    console.log("weatherDetail", weatherDetail)
+
+
+    return (temperature !== false && weatherDetail !== false) ? (
+        <>
+            <p>temperature {(temperature - 273.15).toFixed(2)} celsius</p>
+            <img alt="weatherIcon" src={weatherIconUrl}/>
+            <p>{weatherDetail.description}</p>
+        </>
+    ) : <p>Weather could not be loaded</p>
+}
+
 const CountryDetail = ({country}) => {
     console.log(country)
     let languages = Object.values(country.languages)
     console.log(languages)
+
     return (
         <>
             <h1>{country.name.common}</h1>
@@ -34,6 +68,8 @@ const CountryDetail = ({country}) => {
                 {languages.map(language => <li key={language}>{language}</li>)}
             </ul>
             <img alt="flag" src={country.flags.png}></img>
+            <h2>Weather in {country.capital}</h2>
+            <Weather country={country}/>
         </>
     )
 }

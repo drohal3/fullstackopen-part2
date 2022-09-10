@@ -335,6 +335,7 @@ Modify the application such that the initial state of the data is fetched from t
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
 
 ## Exercise 2.12* Data for countries, step1
+**Task:**
 The API https://restcountries.com provides data for different countries in a machine-readable format, a so-called REST API.
 
 Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
@@ -351,8 +352,41 @@ NB: It is enough that your application works for most of the countries. Some cou
 The solution is demonstrated in the countries application (countries folder). See commits for more details.
 
 ## Exercise 2.13*: Data for countries, step2
+**Task:**
 Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country
 In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like Sudan, can be ignored.
+
+**Solution**
+The solution is demonstrated in the countries application (countries folder). See commits for more details.
+
+## Exercise 2.14*: Data for countries, step3
+**Task:**
+Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is https://openweathermap.org. Note that it might take some minutes until a generated api key is valid.
+
+If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description how to get weather icons.
+
+NB: In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with http://. This issue can be fixed by completing the exercise using Chrome.
+
+NB: You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
+
+Assuming the api-key is t0p53cr3t4p1k3yv4lu3, when the application is started like so:
+```
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
+```
+you can access the value of the key from the process.env object:
+```
+const api_key = process.env.REACT_APP_API_KEY
+// variable api_key has now the value set in startup
+```
+Note that if you created the application using npx create-react-app ...and you want to use a different name for your environment variable then the environment variable name must still begin with REACT_APP_. You can also use a .envfile rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
+```
+# .env
+
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
+```
+Note that you will need to restart the server to apply the changes.
 
 **Solution**
 The solution is demonstrated in the countries application (countries folder). See commits for more details.
