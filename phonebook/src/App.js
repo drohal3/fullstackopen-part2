@@ -1,39 +1,34 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import personsService from './sevices/persons'
+import * as root from "react-dom";
 
 const Filter = ({filter, changeHandler}) => {
-    return (
-        <form>
-            <div>
-                filter shown with: <input value={filter} onChange={changeHandler}/>
-            </div>
-        </form>
-    )
+    return (<form>
+        <div>
+            filter shown with: <input value={filter} onChange={changeHandler}/>
+        </div>
+    </form>)
 }
 
 const PersonForm = ({name, nameChangeHandler, number, numberChangeHandler, addPersonClickHandler}) => {
-    return (
-        <form>
-            <div>
-                name: <input value={name} onChange={nameChangeHandler}/>
-            </div>
-            <div>
-                number: <input value={number} onChange={numberChangeHandler}/>
-            </div>
-            <div>
-                <button type="submit" onClick={addPersonClickHandler}>add</button>
-            </div>
-        </form>
-    )
+    return (<form>
+        <div>
+            name: <input value={name} onChange={nameChangeHandler}/>
+        </div>
+        <div>
+            number: <input value={number} onChange={numberChangeHandler}/>
+        </div>
+        <div>
+            <button type="submit" onClick={addPersonClickHandler}>add</button>
+        </div>
+    </form>)
 }
 
-const Persons = ({persons}) => {
-    return (
-        persons.map(person =>
-            <p key={person.name}>{person.name} {person.number}</p>
-        )
-    )
+const Persons = ({persons, deletePerson}) => {
+    return (persons.map(person => <p key={person.name}>{person.name} {person.number}
+        <button onClick={() => deletePerson(person.id)}>delete</button>
+    </p>))
 }
 
 const App = () => {
@@ -49,6 +44,7 @@ const App = () => {
             .then(data => {
                 console.log('promise fulfilled')
                 setPersons(data)
+                console.log("persons", persons)
             })
     }, [])
 
@@ -63,6 +59,7 @@ const App = () => {
         console.log(event.target.value)
         setNewNumber(event.target.value)
     }
+
     const handleFilterChange = (event) => {
         console.log(event.target.value)
         setFilter(event.target.value)
@@ -78,15 +75,15 @@ const App = () => {
         }
 
         const notePerson = {
-            name: newName,
-            number: newNumber
+            name: newName, number: newNumber
         }
 
         personsService.create(notePerson)
             .then(response => {
-                setPersons(persons.concat(notePerson))
                 setNewName('')
                 setNewNumber('')
+                console.log("persons", response)
+                setPersons(persons.concat(response))
             }).catch(error => {
             console.log('fail')
         })
@@ -96,19 +93,28 @@ const App = () => {
         setNewNumber('')
     }
 
+    const deletePerson = (id) => {
+        if (window.confirm("Do you really want to delete contact?")) {
+            console.log("delete", id)
+            personsService.remove(id).then(response => {
+                setPersons(persons.filter(person => person.id !== id))
+            }).catch(response => {
+                console.log("the person could not be removed")
+            })
+        }
+    }
+
     let personsToShow = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
-    return (
-        <div>
-            <h2>Phonebook</h2>
-            <Filter filter={filter} changeHandler={handleFilterChange}/>
-            <h2>Add new</h2>
-            <PersonForm name={newName} nameChangeHandler={handleNameChange} number={newNumber}
-                        numberChangeHandler={handleNumberChange} addPersonClickHandler={addPerson}/>
-            <h2>Numbers</h2>
-            <Persons persons={personsToShow}/>
-        </div>
-    )
+    return (<div>
+        <h2>Phonebook</h2>
+        <Filter filter={filter} changeHandler={handleFilterChange}/>
+        <h2>Add new</h2>
+        <PersonForm name={newName} nameChangeHandler={handleNameChange} number={newNumber}
+                    numberChangeHandler={handleNumberChange} addPersonClickHandler={addPerson}/>
+        <h2>Numbers</h2>
+        <Persons persons={personsToShow} deletePerson={deletePerson}/>
+    </div>)
 }
 
 export default App
