@@ -66,7 +66,8 @@ const App = () => {
     const addPerson = (event) => {
         event.preventDefault()
 
-        let personsCopy = [...persons] // Question: is this really needed? Is nopt enough to replace object in this array?
+        let personsCopy = [...persons]  // Question: is this really needed? Is nopt enough to replace object in this array?
+                                        // Answer: No, this is obsolete. Map function below will create a copy of the array
 
         const notePerson = {
             name: newName, number: newNumber
