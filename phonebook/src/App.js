@@ -1,6 +1,16 @@
 import {useState, useEffect} from 'react'
 import personsService from './sevices/persons'
 
+const Notification = ({message, type}) => {
+    let notificationClass = `notification ${type}`
+
+    return message !== 'none' ? (
+        <div className={notificationClass}>
+            <p>{message}</p>
+        </div>
+    ) : null
+}
+
 const Filter = ({filter, changeHandler}) => {
     return (<form>
         <div>
@@ -34,6 +44,14 @@ const App = () => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [filter, setFilter] = useState('')
+    const MessageTypes = {
+        Success: "success",
+        Error: "error",
+        None: "none"
+    }
+    const [message, setMessage] = useState(MessageTypes.None)
+
+    const [messageType, setMessageType] = useState(MessageTypes.None)
 
     useEffect(() => {
         console.log('effect')
@@ -79,6 +97,15 @@ const App = () => {
             if (window.confirm("Do you want to update existing contact?")) {
                 personsService.update(existingPerson.id, notePerson).then(returnedPerson => {
                     setPersons(personsCopy.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+
+                    setMessage(
+                        `${returnedPerson.name} updated`
+                    )
+
+                    setMessageType(MessageTypes.Success)
+                    setTimeout(() => {
+                        setMessage(MessageTypes.None)
+                    }, 5000)
                 })
             }
 
@@ -86,11 +113,20 @@ const App = () => {
         }
 
         personsService.create(notePerson)
-            .then(response => {
+            .then(returnedPerson => {
                 setNewName('')
                 setNewNumber('')
-                console.log("persons", response)
-                setPersons(persons.concat(response))
+                console.log("persons", returnedPerson)
+                setPersons(persons.concat(returnedPerson))
+
+                setMessage(
+                    `${returnedPerson.name} added`
+                )
+
+                setMessageType(MessageTypes.Success)
+                setTimeout(() => {
+                    setMessage(MessageTypes.None)
+                }, 5000)
             }).catch(error => {
             console.log('fail')
         })
@@ -117,6 +153,7 @@ const App = () => {
         <h2>Phonebook</h2>
         <Filter filter={filter} changeHandler={handleFilterChange}/>
         <h2>Add new</h2>
+        <Notification message={message} type={messageType}/>
         <PersonForm name={newName} nameChangeHandler={handleNameChange} number={newNumber}
                     numberChangeHandler={handleNumberChange} addPersonClickHandler={addPerson}/>
         <h2>Numbers</h2>

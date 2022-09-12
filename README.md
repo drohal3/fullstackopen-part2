@@ -435,3 +435,9 @@ If the person's information is already in the phonebook, the application can con
 **Solution:**
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
 
+## Exercise 2.19: Phonebook step11
+**Task:**
+Use the improved error message example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed)
+
+**Solution:**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
