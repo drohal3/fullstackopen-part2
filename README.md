@@ -441,3 +441,12 @@ Use the improved error message example from part 2 as a guide to show a notifica
 
 **Solution:**
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
+
+## Exercise 2.20*: Phonebook step12
+**Task:**
+Open your application in two browsers. If you delete a person in browser 1 a short while before attempting to change the person's phone number in browser 2, you will get and 404 error in the console
+
+Note that even if you handle the exception, the error message is printed to the console.
+
+**Solution:**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
