@@ -1,7 +1,5 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
 import personsService from './sevices/persons'
-import * as root from "react-dom";
 
 const Filter = ({filter, changeHandler}) => {
     return (<form>
@@ -68,14 +66,23 @@ const App = () => {
     const addPerson = (event) => {
         event.preventDefault()
 
-        if (persons.find(person => person.name === newName)) {
-            alert(`${newName} is already added to phonebook`)
-
-            return
-        }
+        let personsCopy = [...persons]  // Question: is this really needed? Is nopt enough to replace object in this array?
+                                        // Answer: No, this is obsolete. Map function below will create a copy of the array
 
         const notePerson = {
             name: newName, number: newNumber
+        }
+
+        let existingPerson = personsCopy.find(person => person.name === newName)
+
+        if (existingPerson) {
+            if (window.confirm("Do you want to update existing contact?")) {
+                personsService.update(existingPerson.id, notePerson).then(returnedPerson => {
+                    setPersons(personsCopy.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+                })
+            }
+
+            return
         }
 
         personsService.create(notePerson)

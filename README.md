@@ -426,3 +426,12 @@ const delete = (id) => {
 **Solution:**
 The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
 
+## Exercise 2.18*: Phonebook step10
+**Task:**
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
+
+If the person's information is already in the phonebook, the application can confirm the action from the user
+
+**Solution:**
+The solution is demonstrated in the phonebook application (phonebook folder). See commits for more details.
+
