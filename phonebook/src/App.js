@@ -137,12 +137,33 @@ const App = () => {
     }
 
     const deletePerson = (id) => {
+        let personToRemove = persons.find(person => person.id === id)
         if (window.confirm("Do you really want to delete contact?")) {
             console.log("delete", id)
             personsService.remove(id).then(response => {
                 setPersons(persons.filter(person => person.id !== id))
+                setMessage(
+                    `${personToRemove.name}  removed`
+                )
+
+                setMessageType(MessageTypes.Success)
+                setTimeout(() => {
+                    setMessage(MessageTypes.None)
+                }, 5000)
             }).catch(response => {
-                console.log("the person could not be removed")
+                setPersons(persons.filter(person => person.id !== id))
+                console.log(response)
+                if (response.response.status === 404) {
+                    setMessage(
+                        `${personToRemove.name} has already been removed`
+                    )
+
+                    setMessageType(MessageTypes.Error)
+                    setTimeout(() => {
+                        setMessage(MessageTypes.None)
+                    }, 5000)
+                }
+
             })
         }
     }
