@@ -116,7 +116,7 @@ const App = () => {
             .then(returnedPerson => {
                 setNewName('')
                 setNewNumber('')
-                console.log("persons", returnedPerson)
+                console.log("returned person", returnedPerson)
                 setPersons(persons.concat(returnedPerson))
 
                 setMessage(
@@ -131,7 +131,7 @@ const App = () => {
             console.log('fail')
         })
 
-        setPersons(persons.concat(notePerson))
+        // setPersons(persons.concat(notePerson))
         setNewName('')
         setNewNumber('')
     }
