@@ -84,12 +84,14 @@ const App = () => {
     const addPerson = (event) => {
         event.preventDefault()
 
-        let personsCopy = [...persons]  // Question: is this really needed? Is nopt enough to replace object in this array?
-                                        // Answer: No, this is obsolete. Map function below will create a copy of the array
-
         const notePerson = {
             name: newName, number: newNumber
         }
+
+        // START unique name
+        // Uncomment the section below to allow only one entry per specific name and update existing contact otherwise with confirmation pop up
+        let personsCopy = [...persons]  // Question: is this really needed? Is nopt enough to replace object in this array?
+                                        // Answer: No, this is obsolete. Map function below will create a new array
 
         let existingPerson = personsCopy.find(person => person.name === newName)
 
@@ -97,7 +99,8 @@ const App = () => {
             if (window.confirm("Do you want to update existing contact?")) {
                 personsService.update(existingPerson.id, notePerson).then(returnedPerson => {
                     setPersons(personsCopy.map(person => person.id === returnedPerson.id ? returnedPerson : person))
-
+                    setNewName('')
+                    setNewNumber('')
                     setMessage(
                         `${returnedPerson.name} updated`
                     )
@@ -111,6 +114,8 @@ const App = () => {
 
             return
         }
+
+        // END unique name
 
         personsService.create(notePerson)
             .then(returnedPerson => {
